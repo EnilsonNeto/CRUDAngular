@@ -12,9 +12,13 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "es2020",
+    "paths": { "@angular/*": ["./node_modules/@angular/*"] },
     "lib": [
       "es2018",
       "dom"
     ]
-  }
+  },
+  "angularCompilerOptions": {
+    "enableIvy": false
+ }
 }
