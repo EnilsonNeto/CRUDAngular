@@ -1,1 +1,38 @@
-<p>pessoas works!</p>
+<div class="container p-5">
+  <div class="row">
+    <div class="col-6 border border-light roudend p-5 shadow" *ngIf="formulario">
+      <h6>{{ titleOfForm }}</h6>
+      <hr />
+
+      <form [formGroup]="formulario" (ngSubmit)="sendToform">
+        <div class="form-group">
+          <label>Nome</label>
+          <input type="text" class="form-control form-control-sm" formControlName="nome">
+        </div>
+        <div class="form-group">
+          <label>Sobrenome</label>
+          <input type="text" class="form-control form-control-sm" formControlName="sobrenome">
+        </div>
+        <div class="form-group">
+          <label>Idade</label>
+          <input type="number" class="form-control form-control-sm" formControlName="idade">
+        </div>
+        <div class="form-group">
+          <label>Profissão</label>
+          <input type="text" class="form-control form-control-sm" formControlName="profissao">
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div>
+              <button type="submit" class="btn btn-sm btn-outline-secondary">Salvar</button>
+            </div>
+            <div class="pl-1">
+              <button type="submit" class="btn btn-sm btn-light">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
