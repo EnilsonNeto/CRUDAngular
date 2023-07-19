@@ -1,10 +1,39 @@
-<div class="container p-5">
+<div class="container p-5" *ngIf="viewTable">
+  <div class="border border-light roudend p-5">
+    <h3>Gereciamento de cadastros</h3>
+    <hr />
+    <table class="table table-striped table-hover table-sm" *ngIf="pessoas">
+      <tr class="thead-light">
+        <th>Nome</th>
+        <th>Sobrenome</th>
+        <th>Idade</th>
+        <th>Profissão</th>
+        <th>Ações</th>
+      </tr>
+      <tr *ngFor="let pessoa of pessoas">
+        <td>{{pessoa.nome}}</td>
+        <td>{{pessoa.sobrenome}}</td>
+        <td>{{pessoa.idade}}</td>
+        <td>{{pessoa.profissao}}</td>
+        <td>
+          <button type="button" class="btn btn-sm btn-outline-info"
+            (click)="viewUpdateForm(pessoa.pessoaId)">Atualizar</button> |
+          <button type="button" class="btn btn-sm btn-outline-danger" (click)="viewConfirmationExclude(pessoa.pessoaId, pessoa.nome, conteudoModal)">Excluir</button>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <div>
+      <button type="button" class="btn btn-sm btn-secondary" (click)="viewFormWeb()">Nova Pessoa</button>
+    </div>
+  </div>
+</div>
+<div class="container p-5" *ngIf="viewForm">
   <div class="row">
     <div class="col-6 border border-light roudend p-5 shadow" *ngIf="formulario">
       <h6>{{ titleOfForm }}</h6>
       <hr />
-
-      <form [formGroup]="formulario" (ngSubmit)="sendToform">
+      <form [formGroup]="formulario" (ngSubmit)="sendToform()">
         <div class="form-group">
           <label>Nome</label>
           <input type="text" class="form-control form-control-sm" formControlName="nome">
@@ -28,7 +57,7 @@
               <button type="submit" class="btn btn-sm btn-outline-secondary">Salvar</button>
             </div>
             <div class="pl-1">
-              <button type="submit" class="btn btn-sm btn-light">Cancelar</button>
+              <button type="submit" class="btn btn-sm btn-light" (click)="cancel()">Cancelar</button>
             </div>
           </div>
         </div>
@@ -36,3 +65,20 @@
     </div>
   </div>
 </div>
+
+<ng-template #conteudoModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Confirmação de Exclusão</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Prosseguir com a exclusão do(a) {{namePerson}}
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modalRef.hide()">Não</button>
+    <button type="button" class="btn btn-outline-danger" (click)="deletePerson(pessoaId)">Sim</button>
+  </div>
+</ng-template>
